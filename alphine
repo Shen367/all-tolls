@@ -1,0 +1,64 @@
+if ! command -v figlet &> /dev/null
+then
+    echo "Figlet tidak ditemukan, sedang menginstall..."
+    apk add figlet
+fi
+
+figlet "SASTRA"
+
+ip_tracker() {
+    echo "Masukkan domain atau IP:"
+    read target
+    curl -s "http://ip-api.com/json/$target" | jq
+}
+
+kalkulator() {
+    echo "Masukkan perhitungan (contoh: 5 + 3):"
+    read calc
+    echo "Hasil: $(echo "$calc" | bc)"
+}
+
+whois_lookup() {
+    echo "Masukkan domain atau IP untuk whois:"
+    read domain
+    whois "$domain"
+}
+
+lihat_ip() {
+    echo "IP Anda adalah:"
+    curl -s https://ifconfig.me
+}
+
+while true; do
+    echo ""
+    echo "Menu:"
+    echo "1) IP Tracker"
+    echo "2) Kalkulator"
+    echo "3) Whois"
+    echo "4) Lihat IP Sendiri"
+    echo "5) Keluar"
+    echo "Pilih opsi [1-5]:"
+    read opsi
+
+    case $opsi in
+        1)
+            ip_tracker
+            ;;
+        2)
+            kalkulator
+            ;;
+        3)
+            whois_lookup
+            ;;
+        4)
+            lihat_ip
+            ;;
+        5)
+            echo "Keluar..."
+            exit 0
+            ;;
+        *)
+            echo "Pilihan tidak valid!"
+            ;;
+    esac
+done
