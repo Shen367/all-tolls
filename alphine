@@ -1,3 +1,4 @@
+clear
 if ! command -v figlet &> /dev/null
 then
     echo "Figlet tidak ditemukan, sedang menginstall..."
